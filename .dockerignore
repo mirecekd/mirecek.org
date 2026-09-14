@@ -1,0 +1,7 @@
+# .dockerignore
+memory-bank/
+preview/
+.git/
+.env
+.env.*
+node_modules/
