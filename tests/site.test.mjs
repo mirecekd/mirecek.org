@@ -9,13 +9,14 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const site = resolve(root, 'site');
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
 const publicFiles = ['designs.css', 'designs.js', 'favicon.svg', 'home/index.html', 'index.html'];
-const projects = ['sonic2life', 'clitka', 'diktatOR', 'atoms-for-girls', 'teskitty'];
+const projects = ['sonic2life', 'clitka', 'diktatOR', 'atoms-for-girls', 'teskitty', 'stravacz-mcp', 'bakalari-mcp'];
 const allowedLinks = new Set([
   'https://github.com/mirecekd',
   'https://github.com/mirecekd?tab=repositories',
   'https://www.linkedin.com/in/mirecekd/',
   'https://devpost.com/mirecekd',
   'https://www.credly.com/users/mirecekd',
+  'https://github.com/mirecekd/trnda',
   ...projects.map((name) => `https://github.com/mirecekd/${name}`),
 ]);
 
@@ -81,6 +82,9 @@ test('portfolio keeps the selected projects and accessibility basics', () => {
   assert.doesNotMatch(html, /design-picker|design-select|design-tabs|href="\?design=/);
   assert.doesNotMatch(html, /AI &amp; hlas|Voice AI|zkušenost s výukou ITIL/);
   assert.match(html, /<h3>AWS Golden Jacket<\/h3>/);
+  assert.match(html, /id="z-prace"/);
+  assert.match(html, /href="https:\/\/github.com\/mirecekd\/trnda"/);
+  assert.match(html, /Pro holky\. A pro AI agenty\./);
 });
 
 test('preview remains noindex until an explicit production cutover', () => {
