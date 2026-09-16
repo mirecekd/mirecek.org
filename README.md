@@ -19,4 +19,4 @@ Only `site/` is deployed. Local research, private notes and screenshots are not 
 
 ## License
 
-MIT. Copyright (c) 2026 Miroslav Dvorak.
+MIT. Copyright &copy;2026 Miroslav Dvorak.
