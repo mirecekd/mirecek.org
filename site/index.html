@@ -88,7 +88,8 @@
     h3 { margin: 0 0 12px; font-size: 24px; letter-spacing: -.035em; }
     .card p { margin: 0 0 25px; font-size: 14px; line-height: 1.7; color: var(--muted); }
     .card a { align-self: start; margin-top: auto; font-size: 12px; font-weight: bold; padding: 8px 0; }
-    .about { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; border-top: 1px solid var(--line); }
+    .about { display: flow-root; border-top: 1px solid var(--line); }
+    .about-title { float: left; width: 40%; padding-right: 64px; }
     .about p { margin: 0 0 19px; color: var(--muted); font-size: 17px; line-height: 1.8; }
     .about .signature { font-family: Georgia, serif; font-size: 26px; font-style: italic; color: var(--ink); }
     .contact { background: var(--ink); color: var(--paper); padding: 42px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; gap: 30px; margin: 0 0 50px; }
@@ -106,7 +107,7 @@
       .featured .card-art { height: 95px; }
       .experiment { grid-template-columns: 1fr; gap: 10px; }
       .card-art { height: 83px; }
-      .about { grid-template-columns: 1fr; gap: 25px; }
+      .about-title { float: none; width: auto; padding-right: 0; margin-bottom: 25px; }
       .section { padding: 44px 0; }
       .contact { padding: 30px; flex-direction: column; align-items: start; }
     }
@@ -242,19 +243,17 @@
         </article>
       </section>
       <section class="section about" id="o-mne" aria-labelledby="about-title">
-        <div><p class="section-label mono">03 / Jak pracuji</p><h2 id="about-title">Cloud, který obstojí<br>v reálném provozu.</h2></div>
-        <div>
-          <p>Jako cloud architekt a DevOps inženýr pomáhám týmům s AWS infrastrukturou, automatizací a aplikacemi s generativní AI. Nezačínám výběrem služby: nejdřív potřebuji pochopit systém, rizika a lidi, kteří jej budou používat a provozovat.</p>
-          <p>Z provozu si nesu jednoduchou otázku: jak se to bude spravovat, až to začne někdo opravdu používat? Proto hledám co nejjednodušší řešení, které je bezpečné, zdokumentované a automatizované tam, kde to dává smysl. Vedle architektury mě zajímá Infrastructure as Code, CI/CD i každodenní práce lidí, kteří systémy udržují v chodu.</p>
-          <p>Začínal jsem u správy systémů. Přes servery, úložiště, virtualizaci a provoz datových center jsem se dostal ke cloudu. Zkušenost z více než 30 let v IT mi pomáhá rozlišit, co je v návrhu podstatné.</p>
-          <h3>AWS Golden Jacket</h3>
-          <p>Jsem držitelem <strong>AWS Golden Jacket</strong>, který jsem získal po složení všech tehdy dostupných AWS certifikačních zkoušek. Bunda potěší. Podstatnější je pro mě to, co jsem se cestou naučil a co dokážu použít v praxi.</p>
-          <p>K technické stránce patří i řízení IT služeb. Mám za sebou certifikace ITIL 4 Managing Professional, ITIL v3 Expert. Profesní historii najdeš na <a href="https://www.linkedin.com/in/mirecekd/">LinkedInu</a>, certifikační badges na <a href="https://www.credly.com/users/mirecekd">Credly</a>.</p>
-          <h3>A když zrovna nepracuji?</h3>
-          <p>Technologie mě baví i doma. Hraju si s Home Assistantem, navrhuji věci pro 3D tisk a propojuji zařízení tak, aby mi ušetřila trochu práce. Zajímá mě fotovoltaika a elektromobilita. Někdy z toho vznikne užitečný nástroj, jindy se prostě něco naučím.</p>
-          <p>Mám za sebou několik hackathonů, včetně veřejných. Některé projekty z nich najdeš na mém <a href="https://devpost.com/mirecekd">profilu na Devpostu</a>.</p>
-          <p class="signature">Miroslav Dvořák</p>
-        </div>
+        <div class="about-title"><p class="section-label mono">03 / Jak pracuji</p><h2 id="about-title">Cloud, který obstojí<br>v reálném provozu.</h2></div>
+        <p>Jako cloud architekt a DevOps inženýr pomáhám týmům s AWS infrastrukturou, automatizací a aplikacemi s generativní AI. Nezačínám výběrem služby: nejdřív potřebuji pochopit systém, rizika a lidi, kteří jej budou používat a provozovat.</p>
+        <p>Z provozu si nesu jednoduchou otázku: jak se to bude spravovat, až to začne někdo opravdu používat? Proto hledám co nejjednodušší řešení, které je bezpečné, zdokumentované a automatizované tam, kde to dává smysl. Vedle architektury mě zajímá Infrastructure as Code, CI/CD i každodenní práce lidí, kteří systémy udržují v chodu.</p>
+        <p>Začínal jsem u správy systémů. Přes servery, úložiště, virtualizaci a provoz datových center jsem se dostal ke cloudu. Zkušenost z více než 30 let v IT mi pomáhá rozlišit, co je v návrhu podstatné.</p>
+        <h3>AWS Golden Jacket</h3>
+        <p>Jsem držitelem <strong>AWS Golden Jacket</strong>, který jsem získal po složení všech tehdy dostupných AWS certifikačních zkoušek. Bunda potěší. Podstatnější je pro mě to, co jsem se cestou naučil a co dokážu použít v praxi.</p>
+        <p>K technické stránce patří i řízení IT služeb. Mám za sebou certifikace ITIL 4 Managing Professional, ITIL v3 Expert. Profesní historii najdeš na <a href="https://www.linkedin.com/in/mirecekd/">LinkedInu</a>, certifikační badges na <a href="https://www.credly.com/users/mirecekd">Credly</a>.</p>
+        <h3>A když zrovna nepracuji?</h3>
+        <p>Technologie mě baví i doma. Hraju si s Home Assistantem, navrhuji věci pro 3D tisk a propojuji zařízení tak, aby mi ušetřila trochu práce. Zajímá mě fotovoltaika a elektromobilita. Někdy z toho vznikne užitečný nástroj, jindy se prostě něco naučím.</p>
+        <p>Mám za sebou několik hackathonů, včetně veřejných. Některé projekty z nich najdeš na mém <a href="https://devpost.com/mirecekd">profilu na Devpostu</a>.</p>
+        <p class="signature">Miroslav Dvořák</p>
       </section>
       <section class="contact" id="kontakt" aria-labelledby="contact-title">
         <div><h2 id="contact-title">Zůstaňme v kontaktu.</h2><p>Pracovně mám momentálně plnou kapacitu. Dotazy k osobním projektům jsou vítané, odpověď ale může chvíli trvat.</p></div>
