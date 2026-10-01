@@ -16,6 +16,7 @@ const allowedLinks = new Set([
   'https://www.linkedin.com/in/mirecekd/',
   'https://devpost.com/mirecekd',
   'https://www.credly.com/users/mirecekd',
+  'https://aws.amazon.com/certification/certification-sme-program/',
   'https://github.com/mirecekd/trnda',
   ...projects.map((name) => `https://github.com/mirecekd/${name}`),
 ]);
