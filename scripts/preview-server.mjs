@@ -8,8 +8,10 @@ const routes = new Map([
   ['/index.html', ['index.html', 'text/html; charset=utf-8']],
   ['/favicon.svg', ['favicon.svg', 'image/svg+xml']],
   ['/designs.css', ['designs.css', 'text/css; charset=utf-8']],
+  ['/site.css', ['site.css', 'text/css; charset=utf-8']],
   ['/designs.js', ['designs.js', 'text/javascript; charset=utf-8']],
   ['/home/', ['home/index.html', 'text/html; charset=utf-8']],
+  ['/en/', ['en/index.html', 'text/html; charset=utf-8']],
 ]);
 const server = createServer(async (request, response) => {
   response.setHeader('Cache-Control', 'no-store');
@@ -22,8 +24,8 @@ const server = createServer(async (request, response) => {
   }
   // Do not normalize paths: traversal-shaped and unknown URLs must stay rejected.
   const path = request.url.split('?')[0];
-  if (path === '/home') {
-    response.writeHead(302, { Location: '/home/' }).end();
+  if (path === '/home' || path === '/en') {
+    response.writeHead(302, { Location: `${path}/` }).end();
     return;
   }
   const route = routes.get(path);

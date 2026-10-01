@@ -8,7 +8,7 @@ import test from 'node:test';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const site = resolve(root, 'site');
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
-const publicFiles = ['designs.css', 'designs.js', 'favicon.svg', 'home/index.html', 'index.html'];
+const publicFiles = ['designs.css', 'designs.js', 'en/index.html', 'favicon.svg', 'home/index.html', 'index.html', 'site.css'];
 const projects = ['sonic2life', 'clitka', 'diktatOR', 'atoms-for-girls', 'teskitty', 'stravacz-mcp', 'bakalari-mcp'];
 const allowedLinks = new Set([
   'https://github.com/mirecekd',
@@ -34,12 +34,12 @@ test('deployment directory contains only reviewed files and no symlinks', () => 
 test('HTML has valid local links, unique IDs and no embedded services', () => {
   for (const path of publicFiles.filter((path) => path.endsWith('.html'))) {
     const html = read(`site/${path}`);
-    assert.match(html, /<html lang="cs"(?: data-design="copper")?>/);
+    assert.match(html, path.startsWith('en/') ? /<html lang="en" data-design="copper">/ : /<html lang="cs"(?: data-design="copper")?>/);
     assert.match(html, /name="viewport"/);
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
     assert.doesNotMatch(html, /<(iframe|form|object|embed)\b/i);
     const scripts = [...html.matchAll(/<script\b[^>]*>[\s\S]*?<\/script>/g)].map((m) => m[0]);
-    assert.deepEqual(scripts, path === 'index.html' ? ['<script src="./designs.js" defer></script>'] : []);
+    assert.deepEqual(scripts, path.endsWith('index.html') && path !== 'home/index.html' ? [`<script src="${path === 'index.html' ? '.' : '..'}/designs.js" defer></script>`] : []);
     assert.doesNotMatch(html, /\bon\w+\s*=/i);
     assert.doesNotMatch(html, /@import|url\(\s*["']?https?:|\bsrc\s*=\s*["']https?:/i);
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]);
@@ -64,8 +64,8 @@ test('portfolio keeps the selected projects and accessibility basics', () => {
   const html = read('site/index.html');
   for (const name of projects) assert(html.includes(`https://github.com/mirecekd/${name}`));
   assert.match(html, /class="skip" href="#main"/);
-  assert.match(html, /:focus-visible/);
-  assert.match(html, /prefers-reduced-motion/);
+  assert.match(read('site/site.css'), /:focus-visible/);
+  assert.match(read('site/site.css'), /prefers-reduced-motion/);
   assert.match(html, /pre-alpha/);
   assert.match(html, /Hackathonový projekt/);
   assert.match(html, /hlasová verze zatím není ověřená v autě/);
@@ -110,4 +110,19 @@ test('private directories stay ignored and only main can deploy site', () => {
   assert.match(workflow, /pages: write/);
   assert.match(workflow, /id-token: write/);
   assert.doesNotMatch(workflow, /pull_request_target|secrets\./);
+});
+
+test('CZ and EN pages link to each other and keep the same projects and links', () => {
+  const cs = read('site/index.html');
+  const en = read('site/en/index.html');
+  assert.match(cs, /class="lang mono" href="\.\/en\/" hreflang="en"/);
+  assert.match(en, /class="lang mono" href="\.\.\/" hreflang="cs"/);
+  const external = (html) => [...html.matchAll(/\bhref="(https:[^"]+)"/g)].map((m) => m[1]).sort();
+  assert.deepEqual(external(en), external(cs));
+  assert.match(en, /AWS Certification SME Program/);
+  assert.match(en, /pre-alpha/);
+  assert.match(en, /not a verified health or safety aid/);
+  assert.match(en, /has not been verified in a car yet/);
+  assert.match(en, /over 30 years/);
+  assert.doesNotMatch(en.replace(/<style>[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ''), /\blab\b|Trask|Trustsoft|million|best|first in/i);
 });

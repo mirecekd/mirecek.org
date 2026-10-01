@@ -11,7 +11,7 @@ import test from 'node:test';
     const [output] = await once(child.stdout, 'data');
     const port = Number(output.toString().match(/0\.0\.0\.0:(\d+)/)[1]);
     for (const [path, expected] of [
-      ['/', 200], ['/favicon.svg', 200], ['/home', 302], ['/home/', 200],
+      ['/', 200], ['/en/', 200], ['/en', 302], ['/site.css', 200], ['/favicon.svg', 200], ['/home', 302], ['/home/', 200],
       ['/memory-bank/projectBrief.md', 404], ['/.git/config', 404],
       ['/../memory-bank/projectBrief.md', 404], ['/README.md', 404],
       ['/%2e%2e/memory-bank/projectBrief.md', 404],
