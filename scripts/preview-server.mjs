@@ -13,6 +13,7 @@ const routes = new Map([
   ['/home/', ['home/index.html', 'text/html; charset=utf-8']],
   ['/en/', ['en/index.html', 'text/html; charset=utf-8']],
   ['/ifl/', ['ifl/index.html', 'text/html; charset=utf-8']],
+  ['/ifl/ifl.js', ['ifl/ifl.js', 'text/javascript; charset=utf-8']],
 ]);
 const server = createServer(async (request, response) => {
   response.setHeader('Cache-Control', 'no-store');
