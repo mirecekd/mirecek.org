@@ -12,6 +12,7 @@ const routes = new Map([
   ['/designs.js', ['designs.js', 'text/javascript; charset=utf-8']],
   ['/home/', ['home/index.html', 'text/html; charset=utf-8']],
   ['/en/', ['en/index.html', 'text/html; charset=utf-8']],
+  ['/ifl/', ['ifl/index.html', 'text/html; charset=utf-8']],
 ]);
 const server = createServer(async (request, response) => {
   response.setHeader('Cache-Control', 'no-store');
@@ -24,7 +25,7 @@ const server = createServer(async (request, response) => {
   }
   // Do not normalize paths: traversal-shaped and unknown URLs must stay rejected.
   const path = request.url.split('?')[0];
-  if (path === '/home' || path === '/en') {
+  if (path === '/home' || path === '/en' || path === '/ifl') {
     response.writeHead(302, { Location: `${path}/` }).end();
     return;
   }

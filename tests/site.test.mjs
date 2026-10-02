@@ -8,7 +8,7 @@ import test from 'node:test';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const site = resolve(root, 'site');
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
-const publicFiles = ['designs.css', 'designs.js', 'en/index.html', 'favicon.svg', 'home/index.html', 'index.html', 'site.css'];
+const publicFiles = ['designs.css', 'designs.js', 'en/index.html', 'favicon.svg', 'home/index.html', 'ifl/index.html', 'index.html', 'site.css'];
 const projects = ['sonic2life', 'clitka', 'diktatOR', 'atoms-for-girls', 'teskitty', 'stravacz-mcp', 'bakalari-mcp'];
 const allowedLinks = new Set([
   'https://github.com/mirecekd',
@@ -18,6 +18,7 @@ const allowedLinks = new Set([
   'https://www.credly.com/users/mirecekd',
   'https://aws.amazon.com/certification/certification-sme-program/',
   'https://github.com/mirecekd/trnda',
+  'https://www.google.com/search?q=never+gonna+give+you+up+rick+astley&btnI=1',
   ...projects.map((name) => `https://github.com/mirecekd/${name}`),
 ]);
 
@@ -39,7 +40,7 @@ test('HTML has valid local links, unique IDs and no embedded services', () => {
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
     assert.doesNotMatch(html, /<(iframe|form|object|embed)\b/i);
     const scripts = [...html.matchAll(/<script\b[^>]*>[\s\S]*?<\/script>/g)].map((m) => m[0]);
-    assert.deepEqual(scripts, path.endsWith('index.html') && path !== 'home/index.html' ? [`<script src="${path === 'index.html' ? '.' : '..'}/designs.js" defer></script>`] : []);
+    assert.deepEqual(scripts, path.endsWith('index.html') && !['home/index.html', 'ifl/index.html'].includes(path) ? [`<script src="${path === 'index.html' ? '.' : '..'}/designs.js" defer></script>`] : []);
     assert.doesNotMatch(html, /\bon\w+\s*=/i);
     assert.doesNotMatch(html, /@import|url\(\s*["']?https?:|\bsrc\s*=\s*["']https?:/i);
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]);
